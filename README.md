@@ -51,7 +51,6 @@ project/
 
 | Thông tin | Chi tiết |
 |---|---|
-| **Nguồn** | [Kaggle — adilshamim8](https://www.kaggle.com/datasets/adilshamim8/student-depression-dataset) |
 | **Số mẫu** | 27,901 sinh viên |
 | **Số cột** | 18 thuộc tính |
 | **Target** | `Depression` (0 = không trầm cảm, 1 = có trầm cảm) |
@@ -78,9 +77,7 @@ project/
 
 ### Bước 1 — Tạo môi trường ảo
 
-#### `venv` (built-in, không cần cài thêm) — Khuyến nghị
-
-Chạy trong Git Bash:
+#### Chạy trong Git Bash:
 
 ```bash
 # Tạo môi trường
@@ -111,22 +108,9 @@ pip install -r requirements.txt
 
 ---
 
-## 📈 Kết quả kỳ vọng
-
-| Mô hình | Accuracy | AUC | Ghi chú |
-|---|---|---|---|
-| Logistic Regression | ~80% | ~0.87 | Baseline tốt, dễ giải thích |
-| Decision Tree | ~82% | ~0.88 | Có thể visualize cây |
-| **Random Forest** | **~84%** | **~0.91** | Ổn định, ít overfitting |
-| **XGBoost** | **~85%** | **~0.92** | Tốt nhất, nhanh |
-
-> Kết quả thực tế có thể dao động nhẹ tùy phiên bản thư viện và random seed.
-
----
-
 ## 📚 Tài liệu tham khảo
 
-- [Student Depression Dataset — Kaggle](https://www.kaggle.com/datasets/adilshamim8/student-depression-dataset)
+- [Student Depression Dataset — Kaggle](https://www.kaggle.com/code/salehahmedsaleh/student-depression/input)
 - [Scikit-learn Documentation](https://scikit-learn.org/stable/)
 - [XGBoost Documentation](https://xgboost.readthedocs.io/)
 - Noviandy, T.R., et al. (2025). *An Explainable ML Study of Behavioral and Psychological Determinants of Depression*. Journal of Educational Management and Learning, 3(1).
