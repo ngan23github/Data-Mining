@@ -1,121 +1,81 @@
-# 📊 Data Mining — Project Cuối Kỳ
-
-> **Môn:** Khám Phá Dữ Liệu  
-> **Đề tài chính:** Dự đoán trầm cảm sinh viên dựa trên áp lực học tập, giờ ngủ, stress tài chính và lối sống
+# 🧠 KHAI PHÁ DỮ LIỆU SỨC KHỎE TÂM THẦN SINH VIÊN
+### Student Depression Dataset
 
 ---
 
-## 📁 Cấu trúc thư mục
+## 📁 Mô tả cấu trúc thư mục
 
 ```
-project/
-│
-├── 📓 student_depression.ipynb                ← Notebook chính (ĐỀ TÀI MỚI — chạy file này)
-├── 📓 mobile_addiction.ipynb                  ← Notebook đề tài cũ (mobile addiction)
-├── 📂 charts/ 
-│   ├── 📊 Student_Depression_Dataset.csv
-│   └── 📊 mobile_addiction_data.csv
-│
-├── 📦 requirements.txt                        ← Danh sách thư viện cần cài
-├── 📖 README.md                               ← File mô tả cơ bản
-│
-└── 📂 charts/                                 ← Thư mục chứa biểu đồ (tự tạo khi chạy notebook)
-    ├── 01_target_distribution.png
-    ├── 02_feature_distributions.png
-    └── ...
+📦 project/
+├── 📂 data/
+│   └── Student_Depression_Dataset.csv
+├── 📓 eda.ipynb
+├── 📓 classification.ipynb
+├── 📓 clustering.ipynb
+├── 📄 README.md
+└── 📄 requirements.txt
 ```
 
 ---
 
-## 📋 Mô tả chi tiết các file
-
-### 🔵 File chính
-
-| File | Mô tả | Trạng thái |
-|---|---|---|
-| `student_depression.ipynb` | Notebook đầy đủ: EDA → tiền xử lý → 4 mô hình (LR, DT, RF, XGBoost) → đánh giá → kết luận | ✅ **Chạy file này** |
-| `Student_Depression_Dataset.csv` | 27,901 sinh viên × 18 cột. Dữ liệu thực. Nhãn: `Depression` (0/1) | ✅ Tải từ Kaggle |
-| `requirements.txt` | Danh sách toàn bộ thư viện Python cần thiết | ✅ Dùng để cài |
-
-### 🟡 File tham khảo / đề tài cũ
-
-| File | Mô tả | Ghi chú |
-|---|---|---|
-| `mobile_addiction.ipynb` | Notebook đề tài cũ: phân loại mức độ nghiện điện thoại | ⚠️ Dataset synthetic — accuracy ~25% |
-| `mobile_addiction_data.csv` | 3,000 mẫu × 34 cột. **Synthetic data** — nhãn gán ngẫu nhiên | ⚠️ Không dùng cho đề tài mới |
-| `BaoCao_PhanLoai_NghienDienThoai.docx` | Báo cáo Word hoàn chỉnh đề tài cũ (6 chương, có biểu đồ) | 📄 Tham khảo |
-| `MauBaoCao.docx` | Template mẫu cấu trúc báo cáo từ giảng viên | 📄 Template |
-| `Yêu_cầu_project_cuối_kì` | Đề bài, danh sách thuật toán, yêu cầu đánh giá | 📋 Đề bài |
-
-### 🟢 Dataset chính — Student Depression Dataset
-
-| Thông tin | Chi tiết |
-|---|---|
-| **Số mẫu** | 27,901 sinh viên |
-| **Số cột** | 18 thuộc tính |
-| **Target** | `Depression` (0 = không trầm cảm, 1 = có trầm cảm) |
-| **Loại dữ liệu** | Dữ liệu khảo sát thực tế |
-| **Accuracy kỳ vọng** | 83–85% (AUC ~0.91) |
-
-**Các cột quan trọng:**
-
-| Cột | Kiểu | Mô tả |
-|---|---|---|
-| `Academic Pressure` | Float (0–5) | Mức độ áp lực học tập |
-| `Financial Stress` | Float (0–5) | Mức độ stress tài chính |
-| `Sleep Duration` | Categorical | Thời gian ngủ mỗi ngày |
-| `Dietary Habits` | Categorical | Chế độ ăn uống |
-| `Have you ever had suicidal thoughts ?` | Yes/No | Tiền sử suy nghĩ tự tử |
-| `Family History of Mental Illness` | Yes/No | Tiền sử bệnh tâm thần trong gia đình |
-| `CGPA` | Float | Điểm trung bình tích lũy |
-| `Work/Study Hours` | Float | Số giờ học/làm mỗi ngày |
-| `Depression` | 0/1 | **Biến mục tiêu** |
+### `data/Student_Depression_Dataset.csv`
+Bộ dữ liệu gốc được tải từ [Kaggle](https://www.kaggle.com/datasets/hopesb/student-depression-dataset/data), gồm **27.901 dòng** và **18 cột**, chứa thông tin về nhân khẩu học, thói quen sinh hoạt, mức độ áp lực và tình trạng trầm cảm của sinh viên. Đây là đầu vào chính cho toàn bộ quá trình phân tích và mô hình hóa trong dự án.
 
 ---
 
-## ⚙️ Hướng dẫn cài đặt & Chạy
+### `eda.ipynb`
+Jupyter Notebook thực hiện bước **Phân tích Khám phá Dữ liệu** (Exploratory Data Analysis — EDA), bao gồm:
+- **Phân tích đơn biến** — phân bố biến mục tiêu, các thuộc tính số và phân loại
+- **Phân tích hai biến** — tỷ lệ trầm cảm theo từng yếu tố như áp lực học tập, giờ ngủ, chế độ ăn,...
+- **Phân tích đa biến** — heatmap kết hợp, ma trận tương quan
 
-### Bước 1 — Tạo môi trường ảo
-
-#### Chạy trong Git Bash:
-
-```bash
-# Tạo môi trường
-python -m venv venv
-
-# Kích hoạt
-source venv/Scripts/activate
-```
-
-```bash
-# Thoát môi trường
-deactivate
-
-# Xóa môi trường khi không cần
-rmdir /s /q venv            # Windows
-rm -rf venv                 # macOS / Linux
-```
+> ⚠️ Chạy file này **trước tiên** để nắm tổng quan dữ liệu.
 
 ---
 
-### Bước 2 — Cài đặt thư viện
+### `classification.ipynb`
+Jupyter Notebook giải quyết **bài toán Phân loại** — dự đoán một sinh viên có nguy cơ trầm cảm hay không. Nội dung bao gồm:
+- Tiền xử lý, mã hóa và chuẩn hóa dữ liệu
+- Huấn luyện và so sánh 3 mô hình: **Logistic Regression**, **Random Forest**, **XGBoost**
+- Đánh giá theo Accuracy, Precision, Recall, F1-score và AUC
 
-Sau khi kích hoạt môi trường ảo:
+---
 
+### `clustering.ipynb`
+Jupyter Notebook giải quyết **bài toán Phân cụm** — nhóm sinh viên theo mức độ nguy cơ sức khỏe tâm thần. Nội dung bao gồm:
+- Tạo các đặc trưng tổng hợp (`Mental_Risk_Score`, `Stress_Index`, `Lifestyle_Index`,...)
+- Xác định số cụm bằng **Elbow Method** và **Dendrogram**
+- So sánh **K-Means** và **Hierarchical Clustering**
+- Đánh giá theo Silhouette Score, Davies-Bouldin Index, Dunn's Index
+
+---
+
+## 🚀 Hướng dẫn chạy dự án
+
+**Bước 1 — Cài đặt môi trường:**
 ```bash
 pip install -r requirements.txt
 ```
 
+**Bước 2 — Chạy các notebook theo thứ tự:**
+
+| Thứ tự | File | Mục đích |
+|:---:|---|---|
+| 1 | `eda.ipynb` | Phân tích khám phá dữ liệu |
+| 2 | `classification.ipynb` | Mô hình phân loại |
+| 3 | `clustering.ipynb` | Mô hình phân cụm |
+
+**Bước 3 — Dữ liệu đầu vào:**
+```
+data/Student_Depression_Dataset.csv
+```
+
 ---
 
-## 📚 Tài liệu tham khảo
+## 👥 Thông tin nhóm
 
-- [Student Depression Dataset — Kaggle](https://www.kaggle.com/code/salehahmedsaleh/student-depression/input)
-- [Scikit-learn Documentation](https://scikit-learn.org/stable/)
-- [XGBoost Documentation](https://xgboost.readthedocs.io/)
-- Noviandy, T.R., et al. (2025). *An Explainable ML Study of Behavioral and Psychological Determinants of Depression*. Journal of Educational Management and Learning, 3(1).
-- WHO. (2023). *Depressive disorder (depression)*. WHO Fact Sheet.
-
----
-
-*README — Data Mining Project Cuối Kỳ 2026*
+| | |
+|---|---|
+| **Nhóm** | 03 |
+| **Thành viên** | Lâm Tú Nhi — MSSV: 3123410250 |
+| | Lê Đoàn Kim Ngân — MSSV: 3123410231 |
